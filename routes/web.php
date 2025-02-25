@@ -19,6 +19,11 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth', 'admin')->group(function () {
   Route::get('admin/dashboard', [AdminController::class,'index'])->name('admin/dashboard');
+  Route::resource('/admin/siswa',SiswaController::class);
+  Route::post('/admin/siswa/create',[SiswaController::class,'store'])->name('siswa.store');
+  Route::resource('/admin/akun',LoginRegisterController::class);
+  Route::put('/updateEmail/{akun}',[LoginRegisterController::class, 'updateEmail'])->name('updateEmail');
+  Route::put('/updatePassword/{akun}',[LoginRegisterController::class, 'updatePassword'])->name('updatePassword');
   Route::post('/logout', [LoginRegisterController::class,'logout'])->name('logout');
 });
 Route::middleware('auth')->group(function () {
